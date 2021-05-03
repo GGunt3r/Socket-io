@@ -3,6 +3,11 @@ var app = express();
 var http = require("http").createServer(app);
 var io = require("socket.io")(http);
 
+io.on('connection', (socket) => {
+    console.log(socket);
+    console.log('ID do cliente: ' +socket.id);
+});
+
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
