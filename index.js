@@ -4,8 +4,15 @@ var http = require("http").createServer(app);
 var io = require("socket.io")(http);
 
 io.on('connection', (socket) => {
-    console.log(socket);
-    console.log('ID do cliente: ' +socket.id);
+    socket.on('client', (data) => {
+        console.log('EVENTO DISPARADO')
+        console.log(data);
+    })
+
+    socket.on('palavra', (data) => {
+        console.log(data);
+        socket.emit('resultado', data + ' - Mensagem enviada pelo input');
+    })
 });
 
 app.set('view engine', 'ejs');
